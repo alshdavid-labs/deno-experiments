@@ -22,7 +22,12 @@ pub fn create_snapshot() {
   let cargo_dir = PathBuf::from(env!("CARGO_MANIFEST_DIR"));
   let snapshot = cargo_dir.join("snapshot.bin");
 
-  std::fs::remove_file(&snapshot).unwrap();
+  if snapshot.exists() {
+    println!("deleting existing snapshot");
+    std::fs::remove_file(&snapshot).unwrap();
+  }
+
+  println!("creating new snapshot");
 
   let extensions: Vec<Extension> = vec![
     deno_webidl::deno_webidl::init_ops_and_esm(),
