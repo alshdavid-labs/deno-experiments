@@ -1,3 +1,4 @@
+mod permissions;
 mod create_snapshot;
 
 fn main() {
